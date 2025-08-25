@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>Painel Administrativo - DoaçãoColab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4F46E5',
+                        secondary: '#10B981',
+                        accent: '#F59E0B',
+                        dark: '#1F2937',
+                        light: '#F3F4F6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .status-pending { color: #F59E0B; }
+        .status-approved { color: #10B981; }
+        .status-rejected { color: #EF4444; }
+        .admin-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Header/Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+                    <i class="fas fa-hand-holding-heart text-white text-xl"></i>
+                </div>
+                <span class="text-xl font-bold text-dark">DoaçãoColab</span>
+                <span class="admin-badge text-white text-xs px-2 py-1 rounded-full ml-2">
+                    <i class="fas fa-shield-alt mr-1"></i>ADMIN
+                </span>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <div class="relative group">
+                    <button class="flex items-center space-x-1 text-gray-600 hover:text-primary">
+                        <span>Olá, Admin</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden group-hover:block z-50">
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fas fa-user-shield mr-2"></i> Perfil Admin</a>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fas fa-cog mr-2"></i> Configurações</a>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fas fa-sign-out-alt mr-2"></i> Sair</a>
+                    </div>
+                </div>
+                <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center relative">
+                    <i class="fas fa-bell text-gray-600"></i>
+                    <span class="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full"></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Admin Dashboard Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Dashboard Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-dark mb-2">Painel Administrativo</h1>
+            <p class="text-gray-600">Gerencie todas as operações da plataforma DoaçãoColab</p>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-sm p-6 card-hover transition-all duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">Doações Hoje</p>
+                        <p class="text-2xl font-bold text-dark">R$ 2.450,00</p>
+                        <p class="text-secondary text-sm"><i class="fas fa-arrow-up mr-1"></i>+12% vs ontem</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-secondary bg-opacity-10 flex items-center justify-center">
+                        <i class="fas fa-hand-holding-usd text-secondary text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm p-6 card-hover transition-all duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">Usuários Ativos</p>
+                        <p class="text-2xl font-bold text-dark">1,247</p>
+                        <p class="text-secondary text-sm"><i class="fas fa-arrow-up mr-1"></i>+8% vs ontem</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-primary bg-opacity-10 flex items-center justify-center">
+                        <i class="fas fa-users text-primary text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm p-6 card-hover transition-all duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">Comprovantes Pendentes</p>
+                        <p class="text-2xl font-bold text-dark">23</p>
+                        <p class="text-accent text-sm"><i class="fas fa-clock mr-1"></i>Requer atenção</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-accent bg-opacity-10 flex items-center justify-center">
+                        <i class="fas fa-file-invoice text-accent text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm p-6 card-hover transition-all duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">Taxa de Aprovação</p>
+                        <p class="text-2xl font-bold text-dark">94.2%</p>
+                        <p class="text-secondary text-sm"><i class="fas fa-check-circle mr-1"></i>Excelente</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-green-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column - Recent Donations & Receipts -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Pending Receipts -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-bold text-dark">Comprovantes Pendentes</h2>
+                        <span class="bg-accent bg-opacity-10 text-accent px-3 py-1 rounded-full text-sm font-medium">
+                            23 pendentes
+                        </span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
+                                        <i class="fas fa-user text-gray-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold">Patricia Silva</h4>
+                                        <p class="text-gray-600 text-sm">Doação: R$ 40,00</p>
+                                        <p class="text-gray-500 text-xs">Há 15 minutos</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button class="bg-secondary hover:bg-green-600 text-white px-3 py-1 rounded text-sm transition-colors">
+                                        <i class="fas fa-check mr-1"></i>Aprovar
+                                    </button>
+                                    <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm transition-colors">
+                                        <i class="fas fa-times mr-1"></i>Rejeitar
+                                    </button>
+                                    <button class="bg-primary hover:bg-indigo-700 text-white px-3 py-1 rounded text-sm transition-colors">
+                                        <i class="fas fa-eye mr-1"></i>Ver
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
+                                        <i class="fas fa-user text-gray-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold">João Santos</h4>
+                                        <p class="text-gray-600 text-sm">Doação: R$ 25,00</p>
+                                        <p class="text-gray-500 text-xs">Há 32 minutos</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button class="bg-secondary hover:bg-green-600 text-white px-3 py-1 rounded text-sm transition-colors">
+                                        <i class="fas fa-check mr-1"></i>Aprovar
+                                    </button>
+                                    <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm transition-colors">
+                                        <i class="fas fa-times mr-1"></i>Rejeitar
+                                    </button>
+                                    <button class="bg-primary hover:bg-indigo-700 text-white px-3 py-1 rounded text-sm transition-colors">
+                                        <i class="fas fa-eye mr-1"></i>Ver
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
+                                        <i class="fas fa-user text-gray-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold">Maria Oliveira</h4>
+                                        <p class="text-gray-600 text-sm">Doação: R$ 60,00</p>
+                                        <p class="text-gray-500 text-xs">Há 1 hora</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button class="bg-secondary hover:bg-green-600 text-white px-3 py-1 rounded text-sm transition-colors">
+                                        <i class="fas fa-check mr-1"></i>Aprovar
+                                    </button>
+                                    <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm transition-colors">
+                                        <i class="fas fa-times mr-1"></i>Rejeitar
+                                    </button>
+                                    <button class="bg-primary hover:bg-indigo-700 text-white px-3 py-1 rounded text-sm transition-colors">
+                                        <i class="fas fa-eye mr-1"></i>Ver
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 text-center">
+                        <button class="text-primary hover:text-indigo-700 font-medium">
+                            Ver todos os comprovantes <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Transactions -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h2 class="text-xl font-bold text-dark mb-6">Transações Recentes</h2>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b border-gray-200">
+                                    <th class="text-left py-3 text-gray-600 font-medium">Usuário</th>
+                                    <th class="text-left py-3 text-gray-600 font-medium">Valor</th>
+                                    <th class="text-left py-3 text-gray-600 font-medium">Status</th>
+                                    <th class="text-left py-3 text-gray-600 font-medium">Data</th>
+                                    <th class="text-left py-3 text-gray-600 font-medium">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+                                                <i class="fas fa-user text-gray-600 text-sm"></i>
+                                            </div>
+                                            <span class="font-medium">Patricia Silva</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-3 font-bold">R$ 40,00</td>
+                                    <td class="py-3">
+                                        <span class="status-approved"><i class="fas fa-check-circle mr-1"></i>Aprovado</span>
+                                    </td>
+                                    <td class="py-3 text-gray-600">Hoje, 14:30</td>
+                                    <td class="py-3">
+                                        <button class="text-primary hover:text-indigo-700">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+                                                <i class="fas fa-user text-gray-600 text-sm"></i>
+                                            </div>
+                                            <span class="font-medium">João Santos</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-3 font-bold">R$ 25,00</td>
+                                    <td class="py-3">
+                                        <span class="status-pending"><i class="fas fa-clock mr-1"></i>Pendente</span>
+                                    </td>
+                                    <td class="py-3 text-gray-600">Hoje, 13:45</td>
+                                    <td class="py-3">
+                                        <button class="text-primary hover:text-indigo-700">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+                                                <i class="fas fa-user text-gray-600 text-sm"></i>
+                                            </div>
+                                            <span class="font-medium">Maria Oliveira</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-3 font-bold">R$ 60,00</td>
+                                    <td class="py-3">
+                                        <span class="status-approved"><i class="fas fa-check-circle mr-1"></i>Aprovado</span>
+                                    </td>
+                                    <td class="py-3 text-gray-600">Hoje, 12:20</td>
+                                    <td class="py-3">
+                                        <button class="text-primary hover:text-indigo-700">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Quick Actions & System Info -->
+            <div class="space-y-6">
+                <!-- Quick Actions -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h2 class="text-xl font-bold text-dark mb-6">Ações Rápidas</h2>
+                    
+                    <div class="space-y-3">
+                        <button class="w-full bg-primary hover:bg-indigo-700 text-white py-3 rounded-lg font-medium transition-colors">
+                            <i class="fas fa-users mr-2"></i>Gerenciar Usuários
+                        </button>
+                        <button class="w-full bg-secondary hover:bg-green-600 text-white py-3 rounded-lg font-medium transition-colors">
+                            <i class="fas fa-chart-bar mr-2"></i>Relatórios
+                        </button>
+                        <button class="w-full bg-accent hover:bg-yellow-600 text-white py-3 rounded-lg font-medium transition-colors">
+                            <i class="fas fa-cog mr-2"></i>Configurações
+                        </button>
+                        <button class="w-full bg-gray-600 hover:bg-gray-700 text-white py-3 rounded-lg font-medium transition-colors">
+                            <i class="fas fa-download mr-2"></i>Exportar Dados
+                        </button>
+                    </div>
+                </div>
+
+                <!-- System Status -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h2 class="text-xl font-bold text-dark mb-6">Status do Sistema</h2>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">API Status</span>
+                            <span class="text-secondary"><i class="fas fa-circle mr-1"></i>Online</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">PIX Integration</span>
+                            <span class="text-secondary"><i class="fas fa-circle mr-1"></i>Ativo</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">Database</span>
+                            <span class="text-secondary"><i class="fas fa-circle mr-1"></i>Conectado</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">Email Service</span>
+                            <span class="text-accent"><i class="fas fa-circle mr-1"></i>Lento</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h2 class="text-xl font-bold text-dark mb-6">Atividade Recente</h2>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-2 h-2 rounded-full bg-secondary mt-2"></div>
+                            <div>
+                                <p class="text-sm text-gray-600">Novo usuário registrado</p>
+                                <p class="text-xs text-gray-500">Há 5 minutos</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-2 h-2 rounded-full bg-primary mt-2"></div>
+                            <div>
+                                <p class="text-sm text-gray-600">Comprovante aprovado</p>
+                                <p class="text-xs text-gray-500">Há 12 minutos</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-2 h-2 rounded-full bg-accent mt-2"></div>
+                            <div>
+                                <p class="text-sm text-gray-600">Sistema atualizado</p>
+                                <p class="text-xs text-gray-500">Há 1 hora</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-gray-300 py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                        <i class="fas fa-hand-holding-heart text-white text-sm"></i>
+                    </div>
+                    <span class="text-lg font-bold text-white">DoaçãoColab</span>
+                    <span class="admin-badge text-white text-xs px-2 py-1 rounded-full ml-2">ADMIN</span>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-white">Logs do Sistema</a>
+                    <a href="#" class="hover:text-white">Documentação</a>
+                    <a href="#" class="hover:text-white">Suporte Técnico</a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm">
+                <p>&copy; 2023 DoaçãoColab - Painel Administrativo. Todos os direitos reservados.</p>
+                <p class="mt-1 text-gray-500">Acesso restrito apenas para administradores autorizados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Auto-refresh data every 30 seconds
+        setInterval(() => {
+            // In a real application, this would fetch new data
+            console.log('Refreshing admin data...');
+        }, 30000);
+
+        // Handle receipt approval/rejection
+        function handleReceiptAction(action, receiptId) {
+            // In a real application, this would make an API call
+            console.log(`${action} receipt ${receiptId}`);
+            
+            if (action === 'approve') {
+                alert('Comprovante aprovado com sucesso!');
+            } else if (action === 'reject') {
+                alert('Comprovante rejeitado.');
+            }
+        }
+
+        // Add click handlers to action buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const approveButtons = document.querySelectorAll('button:contains("Aprovar")');
+            const rejectButtons = document.querySelectorAll('button:contains("Rejeitar")');
+            
+            // Note: In a real application, you'd use proper event delegation
+            // and unique identifiers for each receipt
+        });
+    </script>
+</body>
+</html>

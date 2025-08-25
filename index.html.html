@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>Sistema de Doação Colaborativa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4F46E5',
+                        secondary: '#10B981',
+                        accent: '#F59E0B',
+                        dark: '#1F2937',
+                        light: '#F3F4F6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #4F46E5 0%, #10B981 100%);
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .mobile-menu.open {
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Header/Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+                    <i class="fas fa-hand-holding-heart text-white text-xl"></i>
+                </div>
+                <span class="text-xl font-bold text-dark"><a href="../index.html">DoaçãoColab</a></span>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#features" class="text-gray-600 hover:text-primary font-medium">Como Funciona</a>
+                <a href="#benefits" class="text-gray-600 hover:text-primary font-medium">Vantagens</a>
+                <a href="#testimonials" class="text-gray-600 hover:text-primary font-medium">Depoimentos</a>
+                <a href="#faq" class="text-gray-600 hover:text-primary font-medium">Dúvidas</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-gray-600 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+            <div class="hidden md:flex space-x-4">
+                <button class="bg-primary hover:bg-indigo-700 text-white px-6 py-2 rounded-full font-medium transition duration-300">
+                    <a href="cadastro.html" rel="next">Começar Agora</a>
+                </button>
+                <button class="bg-primary hover:bg-indigo-900 text-white px-6 py-2 rounded-full font-medium transition duration-300">
+                    <a href="login.html" rel="next">faça login</a>
+                </button>
+            </div>
+        </div>
+        
+        <!-- menu de telefone -->
+        <div id="mobile-menu" class="mobile-menu md:hidden bg-white w-full">
+            <div class="container mx-auto px-4 py-2">
+                <nav class="flex flex-col space-y-4 pb-4">
+                    <a href="#features" class="text-gray-600 hover:text-primary font-medium py-2 border-b border-gray-100">Como Funciona</a>
+                    <a href="#benefits" class="text-gray-600 hover:text-primary font-medium py-2 border-b border-gray-100">Vantagens</a>
+                    <a href="#testimonials" class="text-gray-600 hover:text-primary font-medium py-2 border-b border-gray-100">Depoimentos</a>
+                    <a href="#faq" class="text-gray-600 hover:text-primary font-medium py-2 border-b border-gray-100">Dúvidas</a>
+                    <div class="flex flex-col space-y-2 pt-2">
+                        <button class="bg-primary hover:bg-indigo-700 text-white px-6 py-2 rounded-full font-medium transition duration-300 w-full">
+                            <a href="cadastro.html" rel="next">Começar Agora</a>
+                        </button>
+                        <button class="bg-primary hover:bg-indigo-900 text-white px-6 py-2 rounded-full font-medium transition duration-300 w-full">
+                            <a href="login.html" rel="next">faça login</a>
+                        </button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- restante do codigo continua imutavel -->
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white">
+        <div class="container mx-auto px-4 py-20 md:py-32">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">Transforme R$20 em Grandes Oportunidades</h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-90">Um sistema colaborativo premium que recompensa sua participação e indicações com retornos crescentes.</p>
+                <div class="flex flex-col md:flex-row justify-center gap-4">
+                    <button class="bg-white text-primary hover:bg-gray-100 px-8 py-4 rounded-full font-bold text-lg transition duration-300 pulse-animation">
+                        Quero Participar <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                    <button class="bg-transparent border-2 border-white hover:bg-white hover:bg-opacity-10 px-8 py-4 rounded-full font-bold text-lg transition duration-300">
+                        <i class="fas fa-play-circle mr-2"></i> Assistir Vídeo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Como Nosso Sistema Funciona</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Um modelo simples e eficaz que beneficia todos os participantes através da colaboração mútua.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-light rounded-xl p-8 feature-card transition duration-300">
+                    <div class="w-16 h-16 rounded-full bg-primary bg-opacity-10 flex items-center justify-center mb-6">
+                        <i class="fas fa-dollar-sign text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-3">Entrada Premium</h3>
+                    <p class="text-gray-600">Com R$20 para começar, você acessa um sistema de maior qualidade com participantes comprometidos e melhores retornos potenciais.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-light rounded-xl p-8 feature-card transition duration-300">
+                    <div class="w-16 h-16 rounded-full bg-secondary bg-opacity-10 flex items-center justify-center mb-6">
+                        <i class="fas fa-users text-secondary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-3">Sistema de Indicações</h3>
+                    <p class="text-gray-600">Indique apenas 3 amigos e veja sua rede crescer exponencialmente. Cada novo nível traz maiores oportunidades de retorno.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-light rounded-xl p-8 feature-card transition duration-300">
+                    <div class="w-16 h-16 rounded-full bg-accent bg-opacity-10 flex items-center justify-center mb-6">
+                        <i class="fas fa-sync-alt text-accent text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-3">Ciclo Sequencial</h3>
+                    <p class="text-gray-600">Você só doa após receber, reduzindo seu risco inicial. Um fluxo inteligente que mantém o sistema em movimento constante.</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="bg-light rounded-xl p-8 feature-card transition duration-300">
+                    <div class="w-16 h-16 rounded-full bg-primary bg-opacity-10 flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-line text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-3">Valores Crescentes</h3>
+                    <p class="text-gray-600">De R$10 até R$300, cada nível oferece retornos maiores. Escalone seus ganhos conforme sua rede se expande.</p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="bg-light rounded-xl p-8 feature-card transition duration-300">
+                    <div class="w-16 h-16 rounded-full bg-secondary bg-opacity-10 flex items-center justify-center mb-6">
+                        <i class="fas fa-home text-secondary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-3">Trabalhe de Casa</h3>
+                    <p class="text-gray-600">Gerencie tudo pelo celular ou computador. Uma oportunidade perfeita para o empreendedorismo digital moderno.</p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="bg-light rounded-xl p-8 feature-card transition duration-300">
+                    <div class="w-16 h-16 rounded-full bg-accent bg-opacity-10 flex items-center justify-center mb-6">
+                        <i class="fas fa-handshake text-accent text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-3">Sem Comissões</h3>
+                    <p class="text-gray-600">100% do valor vai para os participantes. O sistema não retém nenhuma parte, garantindo máxima transparência.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">O Processo em 5 Passos</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Veja como é simples participar e começar a receber retornos</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="relative">
+                    <!-- Timeline -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-primary bg-opacity-20 hidden md:block"></div>
+                    
+                    <!-- Step 1 -->
+                    <div class="flex flex-col md:flex-row items-center mb-12">
+                        <div class="md:w-1/2 md:pr-12 mb-6 md:mb-0 md:text-right"></div>
+                        <div class="w-16 h-16 rounded-full bg-secondary text-white flex items-center justify-center text-2xl font-bold shrink-0 mx-auto md:mx-0">2</div>
+                        <div class="md:w-1/2 md:pl-12 mt-6 md:mt-0 md:text-left">
+                            <h3 class="text-xl font-bold text-dark mb-2">1. Cadastro e Primeira Doação</h3>
+                            <p class="text-gray-600">Faça seu cadastro e realize sua primeira doação de R$20 para entrar no sistema premium.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3 -->
+                    <div class="flex flex-col md:flex-row items-center mb-12">
+                        <div class="md:w-1/2 md:pr-12 mb-6 md:mb-0 md:text-right">
+                            <h3 class="text-xl font-bold text-dark mb-2">3. Receba Seu Retorno</h3>
+                            <p class="text-gray-600">Quando seus indicados completarem suas doações, você recebe R$6 de volta (3x R$2).</p>
+                        </div>
+                        <div class="w-16 h-16 rounded-full bg-accent text-white flex items-center justify-center text-2xl font-bold shrink-0 mx-auto md:mx-0">3</div>
+                        <div class="md:w-1/2 md:pl-12 mt-6 md:mt-0 md:text-left"></div>
+                    </div>
+                    
+                    <!-- Step 4 -->
+                    <div class="flex flex-col md:flex-row items-center mb-12">
+                        <div class="md:w-1/2 md:pr-12 mb-6 md:mb-0 md:text-right"></div>
+                        <div class="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center text-2xl font-bold shrink-0 mx-auto md:mx-0">4</div>
+                        <div class="md:w-1/2 md:pl-12 mt-6 md:mt-0 md:text-left">
+                            <h3 class="text-xl font-bold text-dark mb-2">4. Avance para Próximo Nível</h3>
+                            <p class="text-gray-600">Com seu retorno, você pode avançar para o próximo nível com doação de R$20 e maiores retornos.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 5 -->
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 md:pr-12 mb-6 md:mb-0 md:text-right">
+                            <h3 class="text-xl font-bold text-dark mb-2">5. Escalone Seus Ganhos</h3>
+                            <p class="text-gray-600">Repita o processo em níveis crescentes (R$40, R$160, R$300) para multiplicar seus retornos.</p>
+                        </div>
+                        <div class="w-16 h-16 rounded-full bg-secondary text-white flex items-center justify-center text-2xl font-bold shrink-0 mx-auto md:mx-0">5</div>
+                        <div class="md:w-1/2 md:pl-12 mt-6 md:mt-0 md:text-left"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Vantagens do Nosso Sistema</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Por que milhares de pessoas já aderiram a essa oportunidade</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="flex items-start">
+                    <div class="bg-primary bg-opacity-10 p-3 rounded-lg mr-4">
+                        <i class="fas fa-check-circle text-primary text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-dark mb-2">Acessível para Todos</h3>
+                        <p class="text-gray-600">Com apenas R$20 para começar, qualquer pessoa pode participar, independente da situação financeira.</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start">
+                    <div class="bg-secondary bg-opacity-10 p-3 rounded-lg mr-4">
+                        <i class="fas fa-bolt text-secondary text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-dark mb-2">Crescimento Rápido</h3>
+                        <p class="text-gray-600">O modelo de indicações em 3 níveis permite expansão exponencial da sua rede em pouco tempo.</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start">
+                    <div class="bg-accent bg-opacity-10 p-3 rounded-lg mr-4">
+                        <i class="fas fa-shield-alt text-accent text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-dark mb-2">Risco Controlado</h3>
+                        <p class="text-gray-600">Você só doa após receber, minimizando seu risco financeiro em cada etapa do processo.</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start">
+                    <div class="bg-primary bg-opacity-10 p-3 rounded-lg mr-4">
+                        <i class="fas fa-chart-pie text-primary text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-dark mb-2">Retornos Crescentes</h3>
+                        <p class="text-gray-600">Cada novo nível oferece retornos maiores, com potencial de multiplicar seu investimento inicial.</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start">
+                    <div class="bg-secondary bg-opacity-10 p-3 rounded-lg mr-4">
+                        <i class="fas fa-laptop-house text-secondary text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-dark mb-2">Flexibilidade Total</h3>
+                        <p class="text-gray-600">Gerencie tudo online, no seu tempo, sem necessidade de horários fixos ou deslocamentos.</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start">
+                    <div class="bg-accent bg-opacity-10 p-3 rounded-lg mr-4">
+                        <i class="fas fa-hand-holding-usd text-accent text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-dark mb-2">Sem Taxas Escondidas</h3>
+                        <p class="text-gray-600">100% do valor circula entre os participantes, sem comissões ou retenções pelo sistema.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Earnings Calculator -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:w-1/2 bg-primary text-white p-8">
+                        <h2 class="text-2xl font-bold mb-4">Simule Seus Ganhos</h2>
+                        <p class="mb-6">Veja o potencial de retorno em cada nível do sistema</p>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Nível Atual</label>
+                            <select class="w-full bg-primary bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-2 text-white">
+                                <option>Nível 1 - R$20</option>
+                                <option>Nível 2 - R$40</option>
+                                <option>Nível 3 - R$80</option>
+                                <option>Nível 4 - R$160</option>
+                                <option>Nivel 5 - R$300</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Número de Indicações</label>
+                            <input type="range" min="1" max="3" value="3" class="w-full">
+                            <div class="flex justify-between text-xs mt-1">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full bg-white text-primary hover:bg-gray-100 py-3 rounded-lg font-bold mt-4 transition duration-300">
+                            Calcular Retorno
+                        </button>
+                    </div>
+                    
+                    <div class="md:w-1/2 p-8">
+                        <h3 class="text-xl font-bold text-dark mb-6">Projeção de Ganhos</h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-600">Nível 1 (R$20)</span>
+                                    <span class="font-medium">R$60</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-primary h-2 rounded-full" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-600">Nível 2 (R$40)</span>
+                                    <span class="font-medium">R$120</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-secondary h-2 rounded-full" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-600">Nível 3 (R$80)</span>
+                                    <span class="font-medium">R$240</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-accent h-2 rounded-full" style="width: 50%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-600">Nível 4 (R$160)</span>
+                                    <span class="font-medium">R$480</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-primary h-2 rounded-full" style="width: 25%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-600">Nível 5 (R$300)</span>
+                                    <span class="font-medium">R$900</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-secondary h-2 rounded-full" style="width: 10%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 p-4 bg-gray-50 rounded-lg">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-gray-700">Total Estimado:</span>
+                                <span class="text-2xl font-bold text-primary">R$1,800</span>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-1">* Valores baseados em 3 indicações por nível</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Depoimentos Reais</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Veja o que nossos participantes estão dizendo</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="bg-light rounded-xl p-6 shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-primary bg-opacity-10 flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-primary"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-dark">Carlos S.</h4>
+                            <p class="text-sm text-gray-500">Participante há 3 meses</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Comecei com R$20 sem muita expectativa e hoje já recebi mais de R$500. O sistema realmente funciona quando você se compromete a indicar."</p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-light rounded-xl p-6 shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-secondary bg-opacity-10 flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-secondary"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-dark">Amanda R.</h4>
+                            <p class="text-sm text-gray-500">Participante há 5 meses</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Estou no nível 4 e já recebi R$1,200. Demanda trabalho para indicar, mas os retornos compensam. Ótima renda extra para complementar meu salário."</p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-light rounded-xl p-6 shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-accent bg-opacity-10 flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-accent"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-dark">Roberto F.</h4>
+                            <p class="text-sm text-gray-500">Participante há 2 meses</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"No começo fiquei receoso, mas depois que recebi meu primeiro retorno de R$60, fui avançando. Agora estou no nível 3 e tudo tem sido transparente."</p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Perguntas Frequentes</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Tire suas dúvidas sobre como participar e obter retornos</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto space-y-4">
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <button class="faq-toggle w-full text-left p-6 flex justify-between items-center">
+                        <h3 class="font-bold text-dark">Quanto tempo leva para receber meu primeiro retorno?</h3>
+                        <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-6 hidden">
+                        <p class="text-gray-600">O tempo varia conforme sua capacidade de indicar 3 pessoas. Alguns participantes recebem em poucos dias, outros podem levar algumas semanas. Quanto mais ativo você for nas indicações, mais rápido verá resultados.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <button class="faq-toggle w-full text-left p-6 flex justify-between items-center">
+                        <h3 class="font-bold text-dark">Preciso pagar alguma taxa além das doações?</h3>
+                        <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-6 hidden">
+                        <p class="text-gray-600">Não há taxas escondidas. Todo valor doado vai diretamente para outros participantes do sistema. O único investimento são os valores específicos de cada nível (R$20, R$40, R$80, etc.).</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <button class="faq-toggle w-full text-left p-6 flex justify-between items-center">
+                        <h3 class="font-bold text-dark">Como são feitos os pagamentos?</h3>
+                        <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-6 hidden">
+                        <p class="text-gray-600">Os pagamentos são feitos diretamente entre participantes via PIX ou transferência bancária. O sistema apenas conecta doadores e receptores em cada nível, sem intermediar valores.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <button class="faq-toggle w-full text-left p-6 flex justify-between items-center">
+                        <h3 class="font-bold text-dark">E se eu não conseguir indicar 3 pessoas?</h3>
+                        <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-6 hidden">
+                        <p class="text-gray-600">Você permanece no mesmo nível até completar suas indicações. Não há penalidades, mas também não avança para receber retornos maiores. Recomendamos usar redes sociais e contatos próximos para alcançar as indicações necessárias.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <button class="faq-toggle w-full text-left p-6 flex justify-between items-center">
+                        <h3 class="font-bold text-dark">Qual o risco de perder meu dinheiro?</h3>
+                        <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-6 hidden">
+                        <p class="text-gray-600">O principal risco é a desaceleração no recrutamento de novos participantes. Por isso, quanto antes você entrar, maior a segurança de ter retornos. O valor inicial de R$2 minimiza o risco na experimentação do sistema.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-primary text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Pronto para Transformar R$2 em Grandes Oportunidades?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">Junte-se a milhares de participantes que já estão recebendo retornos através da colaboração mútua.</p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <button class="bg-white text-primary hover:bg-gray-100 px-8 py-4 rounded-full font-bold text-lg transition duration-300">
+                    Quero Começar Agora <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+                <button class="bg-transparent border-2 border-white hover:bg-white hover:bg-opacity-10 px-8 py-4 rounded-full font-bold text-lg transition duration-300">
+                    <i class="fas fa-question-circle mr-2"></i> Tirar Dúvidas
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-gray-300 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+                            <i class="fas fa-hand-holding-heart text-white text-xl"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white">DoaçãoColab</span>
+                    </div>
+                    <p class="mb-4">Um sistema colaborativo que recompensa sua participação e rede de indicações com retornos financeiros crescentes.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Links Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">Como Funciona</a></li>
+                        <li><a href="#" class="hover:text-white">Vantagens</a></li>
+                        <li><a href="#" class="hover:text-white">Depoimentos</a></li>
+                        <li><a href="#" class="hover:text-white">Dúvidas</a></li>
+                        <li><a href="#" class="hover:text-white">Termos de Uso</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Níveis</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">Nível 1 - R$20</a></li>
+                        <li><a href="#" class="hover:text-white">Nível 2 - R$40</a></li>
+                        <li><a href="#" class="hover:text-white">Nível 3 - R$160</a></li>
+                        <li><a href="#" class="hover:text-white">Nível 4 - R$300</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Contato</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-2 text-primary"></i>
+                            <span>contato@doacaocolab.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-2 text-primary"></i>
+                            <span>(11) 98765-4321</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2 text-primary"></i>
+                            <span>São Paulo, Brasil</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p>&copy; 2023 DoaçãoColab. Todos os direitos reservados.</p>
+                <p class="text-sm mt-2 text-gray-500">Este sistema é baseado em colaboração mútua e não constitui um investimento financeiro regulamentado.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Toggle
+        document.querySelectorAll('.faq-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+            
+            // Change icon between bars and times
+            const icon = mobileMenuButton.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                mobileMenuButton.querySelector('i').classList.remove('fa-times');
+                mobileMenuButton.querySelector('i').classList.add('fa-bars');
+            });
+        });
+    </script>
+</body>
+</html>
