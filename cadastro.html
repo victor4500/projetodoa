@@ -54,6 +54,18 @@
             background-color: #10B981;
             width: 100%;
         }
+        /* Added mobile menu styles */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        /* Added smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
 <body class="font-sans bg-gray-50">
@@ -67,10 +79,12 @@
                 <span class="text-xl font-bold text-dark"><a href="../index.html">DoaçãoColab</a></span>
             </div>
             <nav class="hidden md:flex space-x-8">
-                <a href="index.html.html" class="text-gray-600 hover:text-primary font-medium">Página Inicial</a>
+                <a href="principal.html" class="text-gray-600 hover:text-primary font-medium">Página Inicial</a>
+                <a href="#register" class="text-gray-600 hover:text-primary font-medium">Cadastro</a>
             </nav>
-            <button class="md:hidden text-gray-600">
-                <i class="fas fa-bars text-2xl"></i>
+            <!-- Added mobile menu toggle functionality -->
+            <button id="mobileMenuToggle" class="md:hidden text-gray-600 z-50 relative">
+                <i id="menuIcon" class="fas fa-bars text-2xl"></i>
             </button>
             <div class="hidden md:block">
                 <button class="bg-primary hover:bg-indigo-700 text-white px-6 py-2 rounded-full font-medium transition duration-300">
@@ -78,26 +92,43 @@
                 </button>
             </div>
         </div>
+        
+        <!-- Added mobile navigation menu -->
+        <div id="mobileMenu" class="mobile-menu fixed inset-0 bg-white z-40 md:hidden">
+            <div class="flex flex-col h-full pt-20 px-4">
+                <nav class="flex flex-col space-y-6">
+                    <a href="principal.html" class="text-gray-600 hover:text-primary font-medium text-lg py-2 border-b border-gray-200">Página Inicial</a>
+                    <a href="#register" class="text-gray-600 hover:text-primary font-medium text-lg py-2 border-b border-gray-200" onclick="closeMobileMenu()">Cadastro</a>
+                </nav>
+                <div class="mt-8">
+                    <button class="w-full bg-primary hover:bg-indigo-700 text-white px-6 py-3 rounded-full font-medium transition duration-300">
+                        <a href="login.html">Faça login</a>
+                    </button>
+                </div>
+            </div>
+        </div>
     </header>
 
-
     <!-- Hero Section -->
+    <!-- Improved mobile spacing and text sizes -->
     <section class="hero-gradient text-white">
-        <div class="container mx-auto px-4 py-20">
+        <div class="container mx-auto px-4 py-12 md:py-20">
             <div class="max-w-4xl mx-auto text-center">
-                <h1 class="text-4xl md:text-5xl font-bold mb-6">Cadastre-se Agora</h1>
-                <p class="text-xl mb-8 opacity-90">Preencha seus dados para começar a participar do sistema colaborativo premium</p>
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">Cadastre-se Agora</h1>
+                <p class="text-lg md:text-xl mb-6 md:mb-8 opacity-90">Preencha seus dados para começar a participar do sistema colaborativo premium</p>
             </div>
         </div>
     </section>
 
     <!-- Registration Section -->
-    <section id="register" class="py-16 bg-white -mt-10">
+    <!-- Improved mobile layout and spacing -->
+    <section id="register" class="py-8 md:py-16 bg-white -mt-6 md:-mt-10">
         <div class="container mx-auto px-4">
             <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
-                <div class="md:flex">
-                    <div class="md:w-1/2 bg-primary text-white p-8 flex flex-col justify-center">
-                        <h2 class="text-3xl font-bold mb-4">Cadastre-se Agora</h2>
+                <div class="flex flex-col md:flex-row">
+                    <!-- Better mobile layout for info section -->
+                    <div class="w-full md:w-1/2 bg-primary text-white p-6 md:p-8 flex flex-col justify-center">
+                        <h2 class="text-2xl md:text-3xl font-bold mb-4">Cadastre-se Agora</h2>
                         <p class="mb-6">Preencha seus dados para começar a participar do sistema colaborativo</p>
                         <div class="space-y-4">
                             <div class="flex items-center">
@@ -115,31 +146,33 @@
                         </div>
                     </div>
                     
-                    <div class="md:w-1/2 p-8">
+                    <!-- Improved mobile form layout -->
+                    <div class="w-full md:w-1/2 p-6 md:p-8">
                         <form id="registrationForm" class="space-y-4">
                             <div>
                                 <label for="fullName" class="block text-sm font-medium text-gray-700 mb-1">Nome Completo *</label>
                                 <input type="text" id="fullName" name="fullName" required
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition duration-300">
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition duration-300 text-base">
                             </div>
                             
                             <div>
                                 <label for="cpf" class="block text-sm font-medium text-gray-700 mb-1">CPF *</label>
                                 <input type="text" id="cpf" name="cpf" required maxlength="14"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition duration-300"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition duration-300 text-base"
                                     placeholder="000.000.000-00">
                             </div>
                             
                             <div>
                                 <label for="email" class="block text-sm font-medium text-gray-700 mb-1">E-mail *</label>
                                 <input type="email" id="email" name="email" required
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition duration-300">
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition duration-300 text-base">
                             </div>
                             
+                            <!-- Improved mobile WhatsApp input layout -->
                             <div>
                                 <label for="whatsapp" class="block text-sm font-medium text-gray-700 mb-1">WhatsApp (com DDD) *</label>
                                 <div class="flex">
-                                    <select class="w-20 px-2 py-2 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-primary focus:border-primary transition duration-300">
+                                    <select class="w-16 md:w-20 px-2 py-3 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-primary focus:border-primary transition duration-300 text-base">
                                         <option>11</option>
                                         <option>21</option>
                                         <option>31</option>
@@ -151,7 +184,7 @@
                                         <option>91</option>
                                     </select>
                                     <input type="tel" id="whatsapp" name="whatsapp" required maxlength="9"
-                                        class="flex-1 px-4 py-2 border-t border-r border-b border-gray-300 rounded-r-lg focus:ring-2 focus:ring-primary focus:border-primary transition duration-300"
+                                        class="flex-1 px-4 py-3 border-t border-r border-b border-gray-300 rounded-r-lg focus:ring-2 focus:ring-primary focus:border-primary transition duration-300 text-base"
                                         placeholder="98765-4321">
                                 </div>
                             </div>
@@ -160,9 +193,10 @@
                                 <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Senha *</label>
                                 <div class="relative">
                                     <input type="password" id="password" name="password" required minlength="6"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition duration-300">
-                                    <button type="button" class="absolute right-3 top-2 text-gray-500 hover:text-gray-700" onclick="togglePasswordVisibility('password')">
-                                        <i class="far fa-eye"></i>
+                                        class="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition duration-300 text-base">
+                                    <!-- Improved mobile touch target for password toggle -->
+                                    <button type="button" class="absolute right-3 top-3 text-gray-500 hover:text-gray-700 p-1" onclick="togglePasswordVisibility('password')">
+                                        <i class="far fa-eye text-lg"></i>
                                     </button>
                                 </div>
                                 <div class="mt-1 flex items-center">
@@ -175,9 +209,10 @@
                                 <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-1">Confirmar Senha *</label>
                                 <div class="relative">
                                     <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition duration-300">
-                                    <button type="button" class="absolute right-3 top-2 text-gray-500 hover:text-gray-700" onclick="togglePasswordVisibility('confirmPassword')">
-                                        <i class="far fa-eye"></i>
+                                        class="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition duration-300 text-base">
+                                    <!-- Improved mobile touch target for password toggle -->
+                                    <button type="button" class="absolute right-3 top-3 text-gray-500 hover:text-gray-700 p-1" onclick="togglePasswordVisibility('confirmPassword')">
+                                        <i class="far fa-eye text-lg"></i>
                                     </button>
                                 </div>
                                 <div id="passwordMatch" class="text-xs mt-1 hidden">
@@ -190,15 +225,17 @@
                                 </div>
                             </div>
                             
-                            <div class="flex items-center">
+                            <!-- Improved mobile checkbox layout -->
+                            <div class="flex items-start space-x-3">
                                 <input type="checkbox" id="terms" name="terms" required
-                                    class="w-4 h-4 text-primary rounded focus:ring-primary border-gray-300">
-                                <label for="terms" class="ml-2 block text-sm text-gray-700">
+                                    class="w-5 h-5 mt-0.5 text-primary rounded focus:ring-primary border-gray-300 flex-shrink-0">
+                                <label for="terms" class="block text-sm text-gray-700 leading-relaxed">
                                     Li e aceito os <a href="#" class="text-primary hover:underline">Termos de Uso</a> e <a href="#" class="text-primary hover:underline">Política de Privacidade</a>
                                 </label>
                             </div>
                             
-                            <button type="submit" class="w-full bg-primary hover:bg-indigo-700 text-white py-3 rounded-lg font-bold transition duration-300">
+                            <!-- Improved mobile button size -->
+                            <button type="submit" class="w-full bg-primary hover:bg-indigo-700 text-white py-4 rounded-lg font-bold transition duration-300 text-base">
                                 Criar Minha Conta
                             </button>
                             
@@ -211,6 +248,107 @@
             </div>
         </div>
     </section>
+
+    <!-- Added JavaScript for mobile functionality -->
+    <script>
+        // Mobile menu functionality
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = document.getElementById('menuIcon');
+
+        mobileMenuToggle.addEventListener('click', function() {
+            mobileMenu.classList.toggle('active');
+            if (mobileMenu.classList.contains('active')) {
+                menuIcon.className = 'fas fa-times text-2xl';
+                document.body.style.overflow = 'hidden';
+            } else {
+                menuIcon.className = 'fas fa-bars text-2xl';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            menuIcon.className = 'fas fa-bars text-2xl';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Password visibility toggle
+        function togglePasswordVisibility(fieldId) {
+            const field = document.getElementById(fieldId);
+            const icon = field.nextElementSibling.querySelector('i');
+            
+            if (field.type === 'password') {
+                field.type = 'text';
+                icon.className = 'far fa-eye-slash text-lg';
+            } else {
+                field.type = 'password';
+                icon.className = 'far fa-eye text-lg';
+            }
+        }
+
+        // Password strength checker
+        document.getElementById('password').addEventListener('input', function() {
+            const password = this.value;
+            const strengthBar = document.getElementById('passwordStrength');
+            const strengthText = document.getElementById('passwordStrengthText');
+            
+            let strength = 0;
+            if (password.length >= 6) strength++;
+            if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
+            if (password.match(/\d/)) strength++;
+            if (password.match(/[^a-zA-Z\d]/)) strength++;
+            
+            strengthBar.className = 'password-strength rounded mr-2';
+            if (strength <= 1) {
+                strengthBar.classList.add('weak');
+                strengthText.textContent = 'Fraca';
+            } else if (strength <= 2) {
+                strengthBar.classList.add('medium');
+                strengthText.textContent = 'Média';
+            } else {
+                strengthBar.classList.add('strong');
+                strengthText.textContent = 'Forte';
+            }
+        });
+
+        // Password confirmation checker
+        document.getElementById('confirmPassword').addEventListener('input', function() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = this.value;
+            const matchDiv = document.getElementById('passwordMatch');
+            const mismatchDiv = document.getElementById('passwordMismatch');
+            
+            if (confirmPassword.length > 0) {
+                if (password === confirmPassword) {
+                    matchDiv.classList.remove('hidden');
+                    mismatchDiv.classList.add('hidden');
+                } else {
+                    matchDiv.classList.add('hidden');
+                    mismatchDiv.classList.remove('hidden');
+                }
+            } else {
+                matchDiv.classList.add('hidden');
+                mismatchDiv.classList.add('hidden');
+            }
+        });
+
+        // CPF formatting
+        document.getElementById('cpf').addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            this.value = value;
+        });
+
+        // WhatsApp formatting
+        document.getElementById('whatsapp').addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            value = value.replace(/(\d{5})(\d)/, '$1-$2');
+            this.value = value;
+        });
+    </script>
 
 </body>
 </html>
